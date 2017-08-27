@@ -1,20 +1,17 @@
-/* eslint-env node */
-'use strict';
+
+/* jshint node: true */
 
 module.exports = function(environment) {
-  let ENV = {
+  var ENV = {
     modulePrefix: 'medi-stock',
-    environment,
+    environment: environment,
     rootURL: '/',
     locationType: 'auto',
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false
       }
     },
 
@@ -34,6 +31,7 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
+    ENV.baseURL = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter
@@ -43,9 +41,16 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
 
+  ENV.remote_couch = 'http://localhost:5984/medistock';
+  ENV.local_couch = 'medistock';
+  if (environment === 'production') {
+    ENV.baseURL = '/';
+    ENV.remote_couch = 'http://localhost:5984/medistock';
   }
+  ENV.contentSecurityPolicy = {
+    'connect-src': "'self' " + ENV.remote_couch.substring(0, ENV.remote_couch.indexOf('/', 9))
+  };
 
   return ENV;
 };

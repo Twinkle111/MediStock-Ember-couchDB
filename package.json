@@ -37,6 +37,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.3.1",
     "ember-load-initializers": "^1.0.0",
+    "ember-pouch": "^4.3.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.14.1",
     "ember-welcome-page": "^3.0.0",
@@ -46,5 +47,8 @@
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.4"
+  }
 }
